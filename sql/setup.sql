@@ -3,7 +3,7 @@
 DROP TABLE IF EXISTS colors;
 
 CREATE TABLE colors (
-    hex TEXT NOT NULL,
+    hex TEXT AS IDENTITY PRIMARY KEY NOT NULL,
     rgb TEXT NOT NULL,
     hsl TEXT NOT NULL,
     name TEXT
