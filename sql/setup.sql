@@ -3,7 +3,7 @@
 DROP TABLE IF EXISTS colors;
 
 CREATE TABLE colors (
-    hex TEXT AS IDENTITY PRIMARY KEY NOT NULL,
+    hex TEXT PRIMARY KEY NOT NULL,
     rgb TEXT NOT NULL,
     hsl TEXT NOT NULL,
     name TEXT
@@ -12,6 +12,6 @@ CREATE TABLE colors (
 INSERT INTO
   colors (hex, rgb, hsl, name)
 VALUES
-  ('02bfde', '2,191,222', '188,98,44', undefined),
+  ('02bfde', '2,191,222', '188,98,44', NULL),
   ('ff69b4', '255,105,180', '330,100,71', 'HotPink'),
-  ('bbf099', '187,240,153', '97,74,77', undefined);
+  ('bbf099', '187,240,153', '97,74,77', NULL);
