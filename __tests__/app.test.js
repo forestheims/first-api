@@ -24,4 +24,10 @@ describe('first-api routes', () => {
 
     expect(res.body).toEqual({ ...expected });
   });
+
+  it('gets all rows from the colors table', async () => {
+    const expected = await Color.getAll();
+    const res = await request(app).get('/api/v1/colors');
+    expect(res.body).toEqual(expected);
+  });
 });
