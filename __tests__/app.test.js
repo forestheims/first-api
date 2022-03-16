@@ -21,13 +21,18 @@ describe('first-api routes', () => {
       name: '',
     };
     const res = await request(app).post('/api/v1/colors').send(expected);
-
     expect(res.body).toEqual({ ...expected });
   });
 
   it('gets all rows from the colors table', async () => {
     const expected = await Color.getAll();
     const res = await request(app).get('/api/v1/colors');
+    expect(res.body).toEqual(expected);
+  });
+
+  it('gets a unique row from the colors table by hex', async () => {
+    const expected = await Color.findByHex('02bfde');
+    const res = await request(app).get(`/api/v1/colors/${expected.hex}`);
     expect(res.body).toEqual(expected);
   });
 
