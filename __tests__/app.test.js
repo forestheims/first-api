@@ -36,9 +36,34 @@ describe('first-api routes', () => {
     expect(res.body).toEqual(expected);
   });
 
+  it('updates a row in the colors table by hex', async () => {
+    const initial = {
+      hex: 'ab500c',
+      rgb: '171,80,12',
+      hsl: '26,87,36',
+      name: '',
+    };
+    await request(app).post('/api/v1/colors').send(initial);
+    const expected = {
+      hex: 'ab500c',
+      rgb: '171,80,12',
+      hsl: '26,87,36',
+      name: 'orangeish',
+    };
+    const res = await request(app).patch('/api/v1/colors/ab500c').send({
+      name: 'orangeish',
+    });
+    expect(res.body).toEqual(expected);
+  });
+
   it('deletes a row from the colors table by hex', async () => {
     const expected = await Color.findByHex('02bfde');
     const res = await request(app).delete(`/api/v1/colors/${expected.hex}`);
     expect(res.body).toEqual(expected);
+  });
+
+  it('returns 404 for color not found', async () => {
+    const res = await request(app).get('/api/v1/colors/0x0x0x');
+    expect(res.status).toEqual(404);
   });
 });
