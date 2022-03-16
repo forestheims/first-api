@@ -30,4 +30,10 @@ describe('first-api routes', () => {
     const res = await request(app).get('/api/v1/colors');
     expect(res.body).toEqual(expected);
   });
+
+  it('deletes a row from the colors table by hex', async () => {
+    const expected = await Color.findByHex('02bfde');
+    const res = await request(app).delete(`/api/v1/colors/${expected.hex}`);
+    expect(res.body).toEqual(expected);
+  });
 });
